@@ -1,0 +1,14 @@
+<%= render '/layouts/navbar' %>
+<div class ="background-new" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1558201202-e65298e2e869?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);">
+  <div class="container w-50 pt-5 new-form">
+
+    <h1>New Ingredient</h1>
+    <%= simple_form_for [@cocktail, @dose] do |f| %>
+      <%= f.association :ingredient %>
+      <%= f.input :description, label: "Specify amount (parts, cl, dash, etc.)" %>
+      <%= f.submit "Add Ingredient", class: "btn btn-dark" %>
+    <% end %>
+
+  </div>
+
+</div>

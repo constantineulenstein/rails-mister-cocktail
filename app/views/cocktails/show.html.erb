@@ -1,0 +1,25 @@
+<%= render '/layouts/navbar' %>
+
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= @cocktail.img_url %>);">
+  <div class="container">
+    <h1><%= @cocktail.name %></h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="description col-6 pt-3">
+      <h2>Description</h2>
+      <br>
+      <p><%= @cocktail.description %></p>
+    </div>
+    <div class="ingredients col-6 pt-3">
+      <h2>Ingredients</h2>
+      <br>
+      <% @cocktail.doses.each do |dose| %>
+        <p><%= dose.description %> <%= dose.ingredient.name %> <%= link_to dose_path(dose.id), method: :delete do %> <i class="fas fa-trash ml-3"></i> <% end %></p>
+      <% end %>
+      <%= link_to "Add ingredient", new_cocktail_dose_path(@cocktail.id), class: "btn btn-outline-light" %>
+    </div>
+  </div>
+</div>
