@@ -16,7 +16,7 @@ require 'open-uri'
 #   Ingredient.create(name: ingredient["strIngredient1"])
 # end
 
-# Cocktail.destroy_all
+
 
 2.times do
   url_random = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
