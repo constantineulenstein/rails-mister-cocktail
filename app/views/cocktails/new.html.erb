@@ -6,7 +6,8 @@
     <%= simple_form_for @cocktail do |f| %>
       <%= f.input :name %>
       <%= f.input :description %>
-      <%= f.input :img_url, label: "Image Url (if available)" %>
+      <%= f.input :photo %>
+      <%= f.input :photo_cache, as: :hidden %>
       <%= f.submit "Add Cocktail", class: "btn btn-dark" %>
     <% end %>
 

@@ -1,7 +1,9 @@
 <%= render '/layouts/navbar' %>
 
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= @cocktail.img_url %>);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @cocktail.photo %>);">
   <div class="container">
+    <br>
+    <br>
     <h1><%= @cocktail.name %></h1>
   </div>
 </div>
