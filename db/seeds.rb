@@ -6,22 +6,30 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'open-uri'
+# Ingredient.destroy_all
 
-Ingredient.destroy_all
+# url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
+# ingredients_serialized = open(url).read
+# ingredients = JSON.parse(ingredients_serialized)
 
-url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
-ingredients_serialized = open(url).read
-ingredients = JSON.parse(ingredients_serialized)
+# ingredients["drinks"].each do |ingredient|
+#   Ingredient.create(name: ingredient["strIngredient1"])
+# end
 
-ingredients["drinks"].each do |ingredient|
-  Ingredient.create(name: ingredient["strIngredient1"])
+# Cocktail.destroy_all
+
+2.times do
+  url_random = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+  cocktail_random_serialized = open(url_random).read
+  random_cocktail = JSON.parse(cocktail_random_serialized)["drinks"][0]
+
+  cocktail = Cocktail.find_or_create_by!(name: random_cocktail["strDrink"], description: random_cocktail["strInstructions"], img_url: random_cocktail["strDrinkThumb"])
+
+  i = 1
+  while random_cocktail["strIngredient#{i}"] != nil
+    ingredient = Ingredient.find_or_create_by!(name: random_cocktail["strIngredient#{i}"])
+    description = random_cocktail["strMeasure#{i}"].nil? ? "Add" : random_cocktail["strMeasure#{i}"]
+    dose = Dose.create(description: description, cocktail_id: cocktail.id, ingredient_id: ingredient.id)
+    i += 1
+  end
 end
-
-Cocktail.destroy_all
-
-Cocktail.create(name: "Gin & Tonic", img_url: "https://images.unsplash.com/photo-1573624658129-3f7856192f19?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80")
-Cocktail.create(name: "Moscow Mule")
-Cocktail.create(name: "Negroni")
-Cocktail.create(name: "Old Fashioned")
-Cocktail.create(name: "Whiskey Sour")
-Cocktail.create(name: "Dark & Stormy")
