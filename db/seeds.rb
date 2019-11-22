@@ -20,7 +20,7 @@ require 'open-uri'
 # end
 
 
-20.times do
+100.times do
   url_random = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
   cocktail_random_serialized = open(url_random).read
   random_cocktail = JSON.parse(cocktail_random_serialized)["drinks"][0]
